@@ -87,7 +87,7 @@ explore: aggregated_orders {
   aggregate_table: aggregate_sales {
     query: {
       dimensions: [aggregated_orders.created_date,
-        users.state]
+        users.state,users.country]
       measures: [aggregated_orders.average_sale_price,
         aggregated_orders.total_revenue]
     }
