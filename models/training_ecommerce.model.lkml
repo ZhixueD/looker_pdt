@@ -5,12 +5,11 @@ include: "/views/*.view"
 include: "/z_tests/*.lkml"
 include: "/**/*.dashboard"
 
-datagroup: training_ecommerce_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+datagroup: daily_datagroup {
+  sql_trigger: SELECT FORMAT_TIMESTAMP('%F',
+    CURRENT_TIMESTAMP(), 'America/Los_Angeles') ;;
+  max_cache_age: "24 hours"
 }
-
-persist_with: training_ecommerce_default_datagroup
 
 label: "E-Commerce Training"
 
@@ -57,3 +56,5 @@ explore: events {
     relationship: many_to_one
   }
 }
+
+explore: incremental_pdt {}
